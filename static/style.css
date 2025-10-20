@@ -1,0 +1,88 @@
+/* === Estilos globales === */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #060606;
+    margin: 0;
+    padding: 0;
+    color: #c400f5;
+}
+
+/* === Header === */
+header {
+    background-color: #3b0056;
+    color: white;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+header .user {
+    font-size: 1rem;
+}
+
+header .user a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+header .user a:hover {
+    text-decoration: underline;
+}
+
+/* === Contenido principal === */
+main {
+    padding: 30px;
+    max-width: 800px;
+    margin: 30px auto;
+    background-color: #fcfcfc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* === Mensajes Flash === */
+ul.flashes {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+ul.flashes li {
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+ul.flashes li.error {
+    background-color: #ffcccc;
+    color: #b30000;
+    border-left: 5px solid #b30000;
+}
+
+ul.flashes li.success {
+    background-color: #ccffcc;
+    color: #006600;
+    border-left: 5px solid #006600;
+}
+
+/* === Footer === */
+footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 0.85rem;
+    color: #777;
+}
+th.fecha, td.fecha {
+    padding-right: 40px; /* espacio extra a la derecha de la columna fecha */
+}
+
+th.rating, td.rating {
+    padding-left: 10px; /* un poco de espacio al empezar la columna rating */
+}

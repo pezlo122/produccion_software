@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}{{ movie.title }}{% endblock %}
+{% block content %}
+<h2>{{ movie.title }} ({{ movie.release_date }})</h2>
+<p>{{ movie.overview }}</p>
+<h3>Créditos</h3>
+{% if credits %}
+<ul>
+{% for c in credits %}
+<li>{{ c.cast if 'cast' in c else c }}</li>
+{% endfor %}
+</ul>
+{% else %}
+<p>No hay créditos disponibles.</p>
+{% endif %}
+{% endblock %}

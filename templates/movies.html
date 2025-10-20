@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Películas{% endblock %}
+
+{% block content %}
+<h2>Películas</h2>
+
+<table class="movies-table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Título</th>
+      <th class="fecha">Fecha</th>
+      <th class="rating">Rating</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for m in movies %}
+    <tr>
+      <td>{{ m.id }}</td>
+      <td><a href="{{ url_for('movie_detail', movie_id=m.id) }}">{{ m.title }}</a></td>
+      <td class="fecha">{{ m.release_date }}</td>
+      <td class="rating">{{ m.vote_average }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

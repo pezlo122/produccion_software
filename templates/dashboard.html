@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<h2>Panel</h2>
+<p>Bienvenido, {{ user }}. Total películas cargadas: {{ total_movies }}.</p>
+<p><a href="{{ url_for('movies') }}">Ver películas</a></p>
+{% endblock %}

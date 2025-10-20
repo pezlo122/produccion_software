@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{% block title %}MovieVerse{% endblock %}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header>
+<h1>MovieVerse</h1>
+{% if session.user %}
+<div class="user">Hola, {{ session.user }} | <a href="{{ url_for('logout') }}">Cerrar sesión</a></div>
+{% endif %}
+</header>
+<main>
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<ul class="flashes">
+{% for cat,msg in messages %}
+<li class="{{ cat }}">{{ msg }}</li>
+{% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+{% block content %}{% endblock %}
+</main>
+<footer>
+<small>Proyecto de ejemplo · TMDB CSV</small>
+</footer>
+</body>
+</html>
