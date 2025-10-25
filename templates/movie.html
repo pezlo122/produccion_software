@@ -1,16 +1,34 @@
-{% extends 'base.html' %}
-{% block title %}{{ movie.title }}{% endblock %}
-{% block content %}
-<h2>{{ movie.title }} ({{ movie.release_date }})</h2>
-<p>{{ movie.overview }}</p>
-<h3>Créditos</h3>
-{% if credits %}
-<ul>
-{% for c in credits %}
-<li>{{ c.cast if 'cast' in c else c }}</li>
-{% endfor %}
-</ul>
-{% else %}
-<p>No hay créditos disponibles.</p>
-{% endif %}
-{% endblock %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ movie['title'] }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h2>{{ movie['title'] }} ({{ movie['release_date'][:4] if movie['release_date'] }})</h2>
+    {% if movie['poster_path'] %}
+      <img src="https://image.tmdb.org/t/p/w300{{ movie['poster_path'] }}" alt="{{ movie['title'] }}">
+    {% endif %}
+    <p><strong>Géneros:</strong> {% for g in movie['genres'] %} {{ g['name'] }} {% endfor %}</p>
+    <p><strong>Valoración:</strong> {{ movie['vote_average'] }}</p>
+    <p><strong>Sinopsis:</strong> {{ movie['overview'] }}</p>
+
+    <h3>Películas recomendadas</h3>
+    <div class="movies-list">
+      {% for m in recommendations %}
+        <div class="movie-card">
+          <a href="/movie/{{ m['id'] }}">
+            {% if m['poster_path'] %}
+              <img src="https://image.tmdb.org/t/p/w200{{ m['poster_path'] }}" alt="{{ m['title'] }}">
+            {% endif %}
+            <p>{{ m['title'] }}</p>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+    <p><a href="/movies">Volver al listado</a></p>
+  </div>
+</body>
+</html>

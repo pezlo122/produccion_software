@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Panel de Administración</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h2>Panel de Administración</h2>
+    <h3>Usuarios registrados</h3>
+    <table>
+      <tr>
+        <th>Nombre de usuario</th>
+        <th>Acción</th>
+      </tr>
+      {% for u in users %}
+        <tr>
+          <td>{{ u['username'] }}</td>
+          <td><!-- Aquí puedes agregar botones para editar o eliminar usuarios si quieres --></td>
+        </tr>
+      {% endfor %}
+    </table>
+    <p><a href="/movies">Volver a películas</a></p>
+    <p><a href="/logout">Cerrar sesión</a></p>
+  </div>
+</body>
+</html>

@@ -1,13 +1,22 @@
-{% extends 'base.html' %}
-{% block title %}Login - TMDB{% endblock %}
-{% block content %}
-<div class="card login-card">
-<h2>Iniciar sesión</h2>
-<form method="post" action="">
-<label>Usuario<br><input name="username" required></label>
-<label>Contraseña<br><input name="password" type="password" required></label>
-<button type="submit">Entrar</button>
-</form>
-<p>Usuario por defecto: <code>admin</code> / contraseña <code>admin123</code></p>
-</div>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Iniciar sesión</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h2>Iniciar sesión</h2>
+    <form action="/login" method="post">
+      <input type="text" name="username" placeholder="Usuario" required>
+      <input type="password" name="password" placeholder="Contraseña" required>
+      <button type="submit">Ingresar</button>
+      {% if error %}
+        <p class="error">{{ error }}</p>
+      {% endif %}
+    </form>
+    <p>¿No tienes cuenta? <a href="/register">Regístrate aquí</a></p>
+  </div>
+</body>
+</html>

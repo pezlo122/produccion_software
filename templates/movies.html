@@ -1,27 +1,55 @@
-{% extends 'base.html' %}
-{% block title %}Películas{% endblock %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Películas</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h2>Películas</h2>
 
-{% block content %}
-<h2>Películas</h2>
+    <form method="get" action="/movies">
+      <input type="text" name="query" placeholder="Buscar por nombre" value="{{ query }}">
+      <select name="genre">
+        <option value="">Todos los géneros</option>
+        <option value="28" {% if genre=='28' %}selected{% endif %}>Acción</option>
+        <option value="35" {% if genre=='35' %}selected{% endif %}>Comedia</option>
+        <option value="18" {% if genre=='18' %}selected{% endif %}>Drama</option>
+        <option value="27" {% if genre=='27' %}selected{% endif %}>Terror</option>
+        <!-- Agrega más géneros según TMDB -->
+      </select>
+      <button type="submit">Filtrar</button>
+    </form>
 
-<table class="movies-table">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Título</th>
-      <th class="fecha">Fecha</th>
-      <th class="rating">Rating</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for m in movies %}
-    <tr>
-      <td>{{ m.id }}</td>
-      <td><a href="{{ url_for('movie_detail', movie_id=m.id) }}">{{ m.title }}</a></td>
-      <td class="fecha">{{ m.release_date }}</td>
-      <td class="rating">{{ m.vote_average }}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
-{% endblock %}
+    <div class="movies-list">
+      {% for m in movies %}
+        <div class="movie-card">
+          <a href="/movie/{{ m['id'] }}">
+            {% if m['poster_path'] %}
+              <img src="https://image.tmdb.org/t/p/w200{{ m['poster_path'] }}" alt="{{ m['title'] }}">
+            {% endif %}
+            <p>{{ m['title'] }} ({{ m['release_date'][:4] if m['release_date'] }})</p>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="pagination">
+      {% if page > 1 %}
+        <a href="{{ url_for('movies', page=page-1, query=query, genre=genre) }}">« Anterior</a>
+      {% endif %}
+      <span>Página {{ page }} de {{ total_pages }}</span>
+      {% if page %}
+        <a href="{{ url_for('movies', page=page+1, query=query, genre=genre) }}">Siguiente »</a>
+      {% endif %}
+    </div>
+
+    {% if user == 'admin' %}
+      <p><a href="/admin">Panel de Administración</a></p>
+    {% endif %}
+    <p><a href="/logout">Cerrar sesión</a></p>
+  </div>
+</body>
+</html>
+ 
