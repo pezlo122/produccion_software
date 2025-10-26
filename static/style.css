@@ -1,182 +1,195 @@
-/* --- Estilo general --- */
+/* 🌈 ESTILOS GENERALES */
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #1f1c2c, #928dab);
-  color: #333;
-  margin: 0;
-  padding: 0;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(135deg, #000000, #000000);
+    color: white;
 }
 
-/* --- Contenedor principal --- */
-.container {
-  background: #fff;
-  padding: 2.5rem 3rem;
-  border-radius: 15px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-  width: 100%;
-  max-width: 1000px;
-  text-align: center;
-  animation: fadeIn 0.8s ease-in-out;
+/* 🔹 CONTENEDOR DE AUTENTICACIÓN */
+.auth-container {
+    background: rgba(112, 0, 249, 0.418);
+    backdrop-filter: blur(10px);
+    padding: 40px;
+    border-radius: 20px;
+    width: 350px;
+    margin: 8% auto;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(174, 0, 255, 0.4);
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-20px); }
-  to { opacity: 1; transform: translateY(0); }
+.auth-container h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
 }
 
-/* --- Títulos --- */
-h1, h2, h3 {
-  color: #2b2b2b;
-  margin-bottom: 1rem;
+.auth-container h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: #ffcb05;
 }
 
-/* --- Inputs --- */
-input[type="text"],
-input[type="password"],
-select {
-  width: calc(50% - 12px);
-  padding: 10px;
-  margin: 5px 6px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 15px;
-  box-sizing: border-box;
+.auth-container input {
+    width: 85%;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    font-size: 15px;
 }
 
-input:focus, select:focus {
-  border-color: #6c63ff;
-  box-shadow: 0 0 8px rgba(108, 99, 255, 0.4);
-  outline: none;
+.auth-container button {
+    background-color: #ffcb05;
+    color: black;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
 }
 
-/* --- Botones --- */
-button {
-  padding: 12px 25px;
-  background: #6c63ff;
-  border: none;
-  border-radius: 8px;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin-top: 10px;
+.auth-container button:hover {
+    background-color: #ffd83b;
+    transform: scale(1.05);
 }
 
-button:hover {
-  background: #554ee0;
-  transform: translateY(-2px);
+.auth-container a {
+    color: #ffcb05;
+    text-decoration: none;
 }
 
-/* --- Enlaces --- */
-a {
-  color: #6c63ff;
-  text-decoration: none;
-  transition: color 0.3s ease;
+.auth-container a:hover {
+    text-decoration: underline;
 }
 
-a:hover {
-  color: #3f3ab7;
+/* 🔸 MENSAJES FLASH */
+.flash {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    font-weight: bold;
 }
 
-/* --- Mensajes de error --- */
-p.error {
-  color: #d9534f;
-  background: #f8d7da;
-  padding: 10px;
-  border-radius: 6px;
-  margin-top: 10px;
+.flash.error {
+    background-color: #ff4c4c;
+    color: white;
 }
 
-/* --- Dashboard --- */
-.dashboard {
-  text-align: center;
+.flash.success {
+    background-color: #4caf50;
+    color: white;
+}
+
+/* 🎬 DASHBOARD */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #010101;
+    padding: 20px;
+    color: white;
+}
+
+header h1 {
+    font-size: 22px;
+    margin: 0;
 }
 
 .logout {
-  display: inline-block;
-  padding: 10px 20px;
-  background: #ff5252;
-  color: white;
-  border-radius: 8px;
-  text-decoration: none;
-  transition: background 0.3s ease;
+    color: #ffcb05;
+    text-decoration: none;
+    font-weight: bold;
 }
 
 .logout:hover {
-  background: #e43e3e;
+    text-decoration: underline;
 }
 
-/* --- Películas --- */
-.movies-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 20px;
+/* 🎞️ CUADRÍCULA DE PELÍCULAS */
+.movie-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 25px;
+    padding: 40px;
+    justify-items: center;
 }
 
 .movie-card {
-  width: 150px;
-  background: #f5f5f5;
-  border-radius: 10px;
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: rgba(132, 0, 255, 0.676);
+    padding: 15px;
+    border-radius: 15px;
+    text-align: center;
+    transition: transform 0.3s ease;
+    width: 200px;
 }
 
 .movie-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    transform: scale(1.05);
 }
 
 .movie-card img {
-  width: 100%;
-  display: block;
-  border-bottom: 1px solid #ccc;
+    width: 100%;
+    height: 300px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.movie-card h3 {
+    margin: 10px 0 5px;
+    font-size: 18px;
+    color: #ffcb05;
 }
 
 .movie-card p {
-  padding: 5px;
-  font-size: 14px;
-  text-align: center;
-  margin: 0;
+    color: #ccc;
+    font-size: 15px;
 }
 
-/* --- Paginación --- */
-.pagination {
-  margin-top: 20px;
+/* 🎥 PÁGINA DE PELÍCULA */
+.movie-detail {
+    max-width: 900px;
+    margin: 50px auto;
+    text-align: center;
 }
 
-.pagination a {
-  margin: 0 10px;
-  color: #6c63ff;
+.movie-detail img {
+    width: 350px;
+    height: 520px;
+    border-radius: 15px;
+    object-fit: cover;
 }
 
-.pagination span {
-  margin: 0 10px;
-  font-weight: bold;
+.movie-detail h2 {
+    margin-top: 20px;
+    color: #ffcb05;
 }
 
-/* --- Tabla Admin --- */
-table {
-  width: 80%;
-  margin: 20px auto;
-  border-collapse: collapse;
+.movie-detail p {
+    font-size: 17px;
+    line-height: 1.6;
 }
 
-table th, table td {
-  padding: 10px;
-  border: 1px solid #ddd;
+/* 📄 PELÍCULAS RECOMENDADAS */
+.recommendations {
+    margin-top: 40px;
 }
 
-table th {
-  background: #6c63ff;
-  color: white;
+.recommendations h3 {
+    color: #ffcb05;
+    margin-bottom: 15px;
 }
 
-table tr:nth-child(even) {
-  background: #f5f5f5;
+.recommendation-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+}
+
+.recommendation-grid img {
+    width: 100%;
+    height: 260px;
+    border-radius: 10px;
+    object-fit: cover;
 }

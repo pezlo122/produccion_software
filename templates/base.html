@@ -3,39 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %}Sistema de Usuarios{% endblock %}</title>
+  <title>TMDB App</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-  <nav class="navbar">
-    <div class="nav-left">
-      <a href="{{ url_for('home') }}" class="logo">MovieVerse</a>
-    </div>
-    <div class="nav-right">
+  <header>
+    <h1>🎬 TMDB App</h1>
+    <nav>
       {% if session.get('user') %}
-        <a href="{{ url_for('dashboard') }}">Dashboard</a>
-        <a href="{{ url_for('logout') }}" class="logout">Cerrar sesión</a>
+        <a href="{{ url_for('dashboard') }}">Inicio</a>
+        <a href="{{ url_for('logout') }}">Cerrar sesión</a>
       {% else %}
-        <a href="{{ url_for('login') }}">Login</a>
-        <a href="{{ url_for('register') }}">Registro</a>
+        <a href="{{ url_for('login') }}">Iniciar sesión</a>
       {% endif %}
-    </div>
-  </nav>
+    </nav>
+  </header>
 
-  <main class="container">
-    {% with messages = get_flashed_messages(with_categories=true) %}
-      {% if messages %}
-        {% for cat, msg in messages %}
-          <div class="flash {{ cat }}">{{ msg }}</div>
-        {% endfor %}
-      {% endif %}
-    {% endwith %}
-
-    {% block content %}{% endblock %}
-  </main>
-
-  <footer>
-    <p>Nicolas Lopez 67000990</p>
-  </footer>
+  {% block content %}{% endblock %}
 </body>
 </html>

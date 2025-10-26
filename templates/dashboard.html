@@ -2,14 +2,55 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Panel principal</title>
+  <title>Dashboard - CineApp</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-  <div class="container dashboard">
-    <h2>Bienvenido, {{ user }} 👋</h2>
-    <p>Has iniciado sesión correctamente.</p>
-    <a href="/logout" class="logout">Cerrar sesión</a>
+
+<header class="main-header">
+  <h1>Bienvenido, {{ session['user_id'] }} </h1>
+  <div class="header-actions">
+    <form method="GET" action="{{ url_for('dashboard') }}" class="search-form">
+      <input type="text" name="query" placeholder="Buscar película..." value="{{ search_query }}">
+      <select name="genre">
+        <option value="">Todos los géneros</option>
+        {% for genre in genres %}
+          <option value="{{ genre.id }}" {% if genre_id == genre.id|string %}selected{% endif %}>
+            {{ genre.name }}
+          </option>
+        {% endfor %}
+      </select>
+      <button type="submit">🔍 Buscar</button>
+    </form>
+    <a href="{{ url_for('logout') }}" class="logout-btn">Cerrar sesión</a>
   </div>
+</header>
+
+<main class="movie-grid">
+  {% for movie in movies %}
+  <div class="movie-card">
+    <a href="{{ url_for('movie', movie_id=movie.id) }}">
+      {% if movie.poster_path %}
+        <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}">
+      {% else %}
+        <img src="{{ url_for('static', filename='no-image.png') }}" alt="Sin imagen">
+      {% endif %}
+      <h3>{{ movie.title }}</h3>
+      <p>⭐ {{ movie.vote_average }}</p>
+    </a>
+  </div>
+  {% endfor %}
+</main>
+
+<div class="pagination">
+  {% if prev_page %}
+    <a href="{{ url_for('dashboard', page=prev_page, query=search_query, genre=genre_id) }}" class="btn">⬅️ Anterior</a>
+  {% endif %}
+  <span>Página {{ current_page }}</span>
+  {% if next_page %}
+    <a href="{{ url_for('dashboard', page=next_page, query=search_query, genre=genre_id) }}" class="btn">Siguiente ➡️</a>
+  {% endif %}
+</div>
+
 </body>
 </html>

@@ -1,55 +1,36 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Películas</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-  <div class="container">
-    <h2>Películas</h2>
+{% extends "base.html" %}
+{% block content %}
+<div class="movies-container">
+  <h1>🎞️ Catálogo de Películas</h1>
 
-    <form method="get" action="/movies">
-      <input type="text" name="query" placeholder="Buscar por nombre" value="{{ query }}">
-      <select name="genre">
-        <option value="">Todos los géneros</option>
-        <option value="28" {% if genre=='28' %}selected{% endif %}>Acción</option>
-        <option value="35" {% if genre=='35' %}selected{% endif %}>Comedia</option>
-        <option value="18" {% if genre=='18' %}selected{% endif %}>Drama</option>
-        <option value="27" {% if genre=='27' %}selected{% endif %}>Terror</option>
-        <!-- Agrega más géneros según TMDB -->
-      </select>
-      <button type="submit">Filtrar</button>
-    </form>
+  <!-- Filtros -->
+  <form method="get" action="{{ url_for('movies') }}" class="filters">
+    <input type="text" name="search" placeholder="Buscar por nombre..." value="{{ search }}">
+    <input type="text" name="genre" placeholder="Filtrar por género..." value="{{ genre }}">
+    <button type="submit">Filtrar</button>
+  </form>
 
-    <div class="movies-list">
-      {% for m in movies %}
-        <div class="movie-card">
-          <a href="/movie/{{ m['id'] }}">
-            {% if m['poster_path'] %}
-              <img src="https://image.tmdb.org/t/p/w200{{ m['poster_path'] }}" alt="{{ m['title'] }}">
-            {% endif %}
-            <p>{{ m['title'] }} ({{ m['release_date'][:4] if m['release_date'] }})</p>
-          </a>
-        </div>
-      {% endfor %}
-    </div>
-
-    <div class="pagination">
-      {% if page > 1 %}
-        <a href="{{ url_for('movies', page=page-1, query=query, genre=genre) }}">« Anterior</a>
-      {% endif %}
-      <span>Página {{ page }} de {{ total_pages }}</span>
-      {% if page < total_pages %}
-        <a href="{{ url_for('movies', page=page+1, query=query, genre=genre) }}">Siguiente »</a>
-      {% endif %}
-    </div>
-
-    {% if user == 'admin' %}
-      <p><a href="/admin">Panel de Administración</a></p>
-    {% endif %}
-    <p><a href="/logout">Cerrar sesión</a></p>
+  <!-- Grilla de películas -->
+  <div class="grid">
+    {% for movie in movies %}
+      <div class="card">
+        <h3>{{ movie.title }}</h3>
+        <p> {{ movie.release_date or 'Sin fecha' }}</p>
+        <p>⭐ {{ movie.vote_average }}</p>
+        <a href="{{ url_for('movie_detail', movie_id=movie.id) }}" class="btn">Ver detalles</a>
+      </div>
+    {% endfor %}
   </div>
-</body>
-</html>
- 
+
+  <!-- Paginación -->
+  <div class="pagination">
+    {% if page > 1 %}
+      <a href="{{ url_for('movies', page=page-1, search=search, genre=genre) }}">⬅️ Anterior</a>
+    {% endif %}
+    <span>Página {{ page }} de {{ total_pages }}</span>
+    {% if page < total_pages %}
+      <a href="{{ url_for('movies', page=page+1, search=search, genre=genre) }}">Siguiente ➡️</a>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

@@ -1,34 +1,51 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>{{ movie['title'] }}</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <title>{{ movie.title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-  <div class="container">
-    <h2>{{ movie['title'] }} ({{ movie['release_date'][:4] if movie['release_date'] }})</h2>
-    {% if movie['poster_path'] %}
-      <img src="https://image.tmdb.org/t/p/w300{{ movie['poster_path'] }}" alt="{{ movie['title'] }}">
-    {% endif %}
-    <p><strong>Géneros:</strong> {% for g in movie['genres'] %} {{ g['name'] }} {% endfor %}</p>
-    <p><strong>Valoración:</strong> {{ movie['vote_average'] }}</p>
-    <p><strong>Sinopsis:</strong> {{ movie['overview'] }}</p>
 
-    <h3>Películas recomendadas</h3>
-    <div class="movies-list">
-      {% for m in recommendations %}
-        <div class="movie-card">
-          <a href="/movie/{{ m['id'] }}">
-            {% if m['poster_path'] %}
-              <img src="https://image.tmdb.org/t/p/w200{{ m['poster_path'] }}" alt="{{ m['title'] }}">
-            {% endif %}
-            <p>{{ m['title'] }}</p>
-          </a>
-        </div>
-      {% endfor %}
+<header>
+    <a href="{{ url_for('dashboard') }}" class="back-button">⬅ Volver</a>
+    <h1>{{ movie.title }}</h1>
+</header>
+
+<section class="movie-detail">
+    <div class="movie-poster">
+        {% if movie.poster_path %}
+            <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}">
+        {% else %}
+            <img src="{{ url_for('static', filename='no-image.png') }}" alt="Sin imagen">
+        {% endif %}
     </div>
-    <p><a href="/movies">Volver al listado</a></p>
-  </div>
+
+    <div class="movie-info">
+        <h2>{{ movie.title }}</h2>
+        <p><strong>⭐ Calificación:</strong> {{ movie.vote_average }}</p>
+        <p><strong>Sinopsis:</strong> {{ movie.overview }}</p>
+    </div>
+</section>
+
+<section class="recommendations">
+    <h2>Recomendaciones similares</h2>
+    <div class="movie-grid">
+        {% for rec in recommendations %}
+            <div class="movie-card">
+                <a href="{{ url_for('movie', movie_id=rec.id) }}">
+                    {% if rec.poster_path %}
+                        <img src="https://image.tmdb.org/t/p/w500{{ rec.poster_path }}" alt="{{ rec.title }}">
+                    {% else %}
+                        <img src="{{ url_for('static', filename='no-image.png') }}" alt="Sin imagen">
+                    {% endif %}
+                    <h3>{{ rec.title }}</h3>
+                    <p>⭐ {{ rec.vote_average }}</p>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
 </body>
 </html>
