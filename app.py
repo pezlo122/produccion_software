@@ -205,13 +205,18 @@ def dashboard(request: Request, page: int = 1, query: str = ""):
 
 @app.get("/movie/{movie_id}")
 def movie_detail(request: Request, movie_id: int):
+<<<<<<< HEAD
     # ==========================
     # PROTEGER RUTA
     # ==========================
+=======
+    # Proteger ruta
+>>>>>>> 5481e56547d1ff309e5282a8d938c2bd3d059fb6
     current_user = require_user(request)
     if not current_user:
         return RedirectResponse("/login", status_code=302)
 
+<<<<<<< HEAD
     # ==========================
     # MENSAJE FLASH (si existe)
     # ==========================
@@ -220,35 +225,53 @@ def movie_detail(request: Request, movie_id: int):
     # ==========================
     # CONSULTAR DETALLES DE LA PELÍCULA
     # ==========================
+=======
+    flash = pop_flash(request)
+
+>>>>>>> 5481e56547d1ff309e5282a8d938c2bd3d059fb6
     movie = requests.get(
         f"{TMDB_BASE_URL}/movie/{movie_id}",
         params={"api_key": TMDB_API_KEY, "language": "es-ES"}
     ).json()
 
+<<<<<<< HEAD
     # ==========================
     # CONSULTAR RECOMENDACIONES
     # ==========================
     recommendations = requests.get(
+=======
+    rec = requests.get(
+>>>>>>> 5481e56547d1ff309e5282a8d938c2bd3d059fb6
         f"{TMDB_BASE_URL}/movie/{movie_id}/recommendations",
         params={"api_key": TMDB_API_KEY, "language": "es-ES"}
     ).json().get("results", [])
 
+<<<<<<< HEAD
     # ==========================
     # RETORNAR TEMPLATE
     # ==========================
+=======
+>>>>>>> 5481e56547d1ff309e5282a8d938c2bd3d059fb6
     return templates.TemplateResponse(
         "movie.html",
         {
             "request": request,
             "movie": movie,
+<<<<<<< HEAD
             "recommendations": recommendations,
+=======
+            "recommendations": rec,
+>>>>>>> 5481e56547d1ff309e5282a8d938c2bd3d059fb6
             "user": current_user,
             "flash": flash
         }
     )
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5481e56547d1ff309e5282a8d938c2bd3d059fb6
 # -----------------------------------------------------------------------------------
 # AGREGAR PELÍCULA PERSONALIZADA
 # -----------------------------------------------------------------------------------

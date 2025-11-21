@@ -7,7 +7,15 @@
 </head>
 
 <body>
+    <div class="page-wrapper">
+        <div class="movie-detail">
+            {% if movie.poster_path %}
+                <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}">
+            {% elif movie.poster %}
+                <img src="{{ movie.poster }}" alt="{{ movie.title }}">
+            {% endif %}
 
+<<<<<<< HEAD
 <header>
     <h1>Detalle de la película</h1>
     <a href="/dashboard" class="logout">⬅ Volver al Catálogo</a>
@@ -71,5 +79,18 @@
 
 </div>
 
+=======
+            <h2>{{ movie.title }}</h2>
+
+            {% if movie.overview %}
+                <p>{{ movie.overview }}</p>
+            {% endif %}
+
+            <p style="margin-top: 20px;">
+                <a href="/dashboard" style="color:#ffcb05; text-decoration:none;">⬅ Volver al catálogo</a>
+            </p>
+        </div>
+    </div>
+>>>>>>> 5481e56547d1ff309e5282a8d938c2bd3d059fb6
 </body>
 </html>

@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
     "movies": [
         {
             "id": 100001,
@@ -7,4 +8,7 @@
             "poster": "https://image.tmdb.org/t/p/w500/rAiYTfKGqDCRIIqo664sY9XZIvQ.jpg"
         }
     ]
+=======
+    "movies": []
+>>>>>>> 5481e56547d1ff309e5282a8d938c2bd3d059fb6
 }
