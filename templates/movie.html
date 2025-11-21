@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ movie.title }}</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="page-wrapper">
+        <div class="movie-detail">
+            {% if movie.poster_path %}
+                <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}">
+            {% elif movie.poster %}
+                <img src="{{ movie.poster }}" alt="{{ movie.title }}">
+            {% endif %}
+
+            <h2>{{ movie.title }}</h2>
+
+            {% if movie.overview %}
+                <p>{{ movie.overview }}</p>
+            {% endif %}
+
+            <p style="margin-top: 20px;">
+                <a href="/dashboard" style="color:#ffcb05; text-decoration:none;">⬅ Volver al catálogo</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

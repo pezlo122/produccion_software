@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="movies-container">
+  <h1>Catálogo de Películas</h1>
+
+  <!-- Filtros -->
+  <form method="get" action="{{ url_for('movies') }}" class="filters">
+    <input type="text" name="search" placeholder="Buscar por nombre..." value="{{ search }}">
+    <input type="text" name="genre" placeholder="Filtrar por género..." value="{{ genre }}">
+    <button type="submit">Filtrar</button>
+  </form>
+
+  <!-- Estructura de visualizacion de películas -->
+  <div class="grid">
+    {% for movie in movies %}
+      <div class="card">
+        <h3>{{ movie.title }}</h3>
+        <p> {{ movie.release_date or 'Sin fecha' }}</p>
+        <p>⭐ {{ movie.vote_average }}</p>
+        <a href="{{ url_for('movie_detail', movie_id=movie.id) }}" class="btn">Ver detalles</a>
+      </div>
+    {% endfor %}
+  </div>
+
+  <!-- Paginas -->
+  <div class="pagination">
+    {% if page > 1 %}
+      <a href="{{ url_for('movies', page=page-1, search=search, genre=genre) }}">⬅️ Anterior</a>
+    {% endif %}
+    <span>Página {{ page }} de {{ total_pages }}</span>
+    {% if page < total_pages %}
+      <a href="{{ url_for('movies', page=page+1, search=search, genre=genre) }}">Siguiente ➡️</a>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

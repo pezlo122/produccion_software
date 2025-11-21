@@ -1,0 +1,32 @@
+<!-- templates/base.html -->
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>{% block title %}CineApp{% endblock %}</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <h1><a href="/dashboard">CineApp</a></h1>
+    <nav>
+      {% if request.session.get('user') %}
+        <span class="user">Hola, {{ request.session.get('user') }}</span>
+        <a href="/logout">Cerrar sesión</a>
+      {% else %}
+        <a href="/login">Iniciar sesión</a>
+        <a href="/register">Registrarse</a>
+      {% endif %}
+    </nav>
+  </header>
+
+  <main class="main">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="footer">
+    <small>Proyecto - Repositorio</small>
+  </footer>
+</body>
+</html>
