@@ -3,49 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ movie.title }}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
+    <div class="page-wrapper">
+        <div class="movie-detail">
+            {% if movie.poster_path %}
+                <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}">
+            {% elif movie.poster %}
+                <img src="{{ movie.poster }}" alt="{{ movie.title }}">
+            {% endif %}
 
-<header>
-    <a href="{{ url_for('dashboard') }}" class="back-button">⬅ Volver</a>
-    <h1>{{ movie.title }}</h1>
-</header>
+            <h2>{{ movie.title }}</h2>
 
-<section class="movie-detail">
-    <div class="movie-poster">
-        {% if movie.poster_path %}
-            <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}">
-        {% else %}
-            <img src="{{ url_for('static', filename='no-image.png') }}" alt="Sin imagen">
-        {% endif %}
+            {% if movie.overview %}
+                <p>{{ movie.overview }}</p>
+            {% endif %}
+
+            <p style="margin-top: 20px;">
+                <a href="/dashboard" style="color:#ffcb05; text-decoration:none;">⬅ Volver al catálogo</a>
+            </p>
+        </div>
     </div>
-
-    <div class="movie-info">
-        <h2>{{ movie.title }}</h2>
-        <p><strong>⭐ Calificación:</strong> {{ movie.vote_average }}</p>
-        <p><strong>Sinopsis:</strong> {{ movie.overview }}</p>
-    </div>
-</section>
-
-<section class="recommendations">
-    <h2>Recomendaciones similares</h2>
-    <div class="movie-grid">
-        {% for rec in recommendations %}
-            <div class="movie-card">
-                <a href="{{ url_for('movie', movie_id=rec.id) }}">
-                    {% if rec.poster_path %}
-                        <img src="https://image.tmdb.org/t/p/w500{{ rec.poster_path }}" alt="{{ rec.title }}">
-                    {% else %}
-                        <img src="{{ url_for('static', filename='no-image.png') }}" alt="Sin imagen">
-                    {% endif %}
-                    <h3>{{ rec.title }}</h3>
-                    <p>⭐ {{ rec.vote_average }}</p>
-                </a>
-            </div>
-        {% endfor %}
-    </div>
-</section>
-
 </body>
 </html>
