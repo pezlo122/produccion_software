@@ -1,0 +1,10 @@
+{
+    "movies": [
+        {
+            "id": 100001,
+            "title": "peliculas personalizadas",
+            "description": "hola",
+            "poster": "https://image.tmdb.org/t/p/w500/rAiYTfKGqDCRIIqo664sY9XZIvQ.jpg"
+        }
+    ]
+}
